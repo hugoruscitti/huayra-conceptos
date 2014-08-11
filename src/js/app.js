@@ -1,3 +1,4 @@
+var app = angular.module('app', []);
 var canvas = new fabric.CanvasWithViewport('c');
 
 function crear_linea() {
@@ -210,18 +211,7 @@ function crear_subitem() {
 
 
 
-function zoom_acercar() {
-  canvas.setZoom(canvas.viewport.zoom*1.1);
-}
 
-function zoom_alejar() {
-  canvas.setZoom(canvas.viewport.zoom*.9);
-}
-
-function zoom_reiniciar() {
-  canvas.viewport.zoom = 1;
-  canvas.setZoom(canvas.viewport.zoom);
-}
 
 function definir_modo_paneo(estado) {
   canvas.isGrabMode = estado;
