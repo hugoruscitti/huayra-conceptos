@@ -216,3 +216,37 @@ function crear_subitem() {
 function definir_modo_paneo(estado) {
   canvas.isGrabMode = estado;
 }
+
+
+
+
+  function animate(e, dir) {
+    if (e.target) {
+      fabric.util.animate({
+        startValue: e.target.get('angle'),
+        endValue: e.target.get('angle') + (dir ? 3 : -3),
+        duration: 75,
+        onChange: function(value) {
+          e.target.setAngle(value);
+          canvas.renderAll();
+        },
+        onComplete: function() {
+          e.target.setCoords();
+        }
+      });
+      fabric.util.animate({
+        startValue: e.target.get('scaleX'),
+        endValue: e.target.get('scaleX') + (dir ? 0.1 : -0.1),
+        duration: 75,
+        onChange: function(value) {
+          e.target.scale(value);
+          canvas.renderAll();
+        },
+        onComplete: function() {
+          e.target.setCoords();
+        }
+      });
+    }
+  }
+  canvas.on('mouse:down', function(e) { animate(e, 1); });
+  canvas.on('mouse:up', function(e) { animate(e, 0); });
