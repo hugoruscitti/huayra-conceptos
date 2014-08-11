@@ -1,5 +1,4 @@
-var canvas = new fabric.Canvas('c');
-
+var canvas = new fabric.CanvasWithViewport('c');
 
 function crear_linea() {
   var tmp = new fabric.Line([0, 0, 100, 100], {
@@ -17,8 +16,22 @@ function crear_linea() {
 function ajustar_lineas_conectadas(elemento) {
   var p = elemento;
 
-  p.line1 && p.line1.set({ 'x2': p.left + p.width/2, 'y2': p.top + p.height / 2});
-  p.line2 && p.line2.set({ 'x1': p.left + p.width/2, 'y1': p.top + p.height / 2});
+  p.linea_que_llega && p.linea_que_llega.set({
+    'x2': p.left + p.width/2,
+    'y2': p.top + p.height / 2
+  });
+
+  if (p.lineas_que_salen && p.lineas_que_salen.length > 0) {
+    for (var i in p.lineas_que_salen) {
+      p.lineas_que_salen[i].set({
+        'x1': p.left + p.width/2,
+        'y1': p.top + p.height/2}
+      );
+
+    }
+  }
+
+  //p.line2 && p.line2.set();
 }
 
 canvas.on('object:moving', function(e) {
@@ -97,28 +110,23 @@ function crear_concepto(texto, x, y) {
     radius: 5,
   });
 
-  var groupo = new fabric.Group([tmp, texto, circulo], {
+  var grupo = new fabric.Group([tmp, texto, circulo], {
     left: x,
     top: y,
     tipo: 'concepto',
     hasControls: false,
   });
 
-  return groupo;
+  grupo.linea_que_llega = undefined;
+  grupo.lineas_que_salen = [];
+
+  return grupo;
 }
 
 
 var concepto_1 = crear_concepto("ejemplo", 0, 150);
 
-var etiqueta_1 = new fabric.IText('es parte de ...', {
-  left: 100,
-  top: 100,
-  fontSize: 15,
-  textBackgroundColor: 'white',
-  fill: 'black',
-  tipo: 'etiqueta',
-  hasControls: false,
-});
+var etiqueta_1 = crear_etiqueta("es parte de ...", 100, 100);
 
 
 function crear_etiqueta(texto, x, y) {
@@ -135,6 +143,9 @@ function crear_etiqueta(texto, x, y) {
     hasControls: false,
   });
 
+  etiqueta_1.linea_que_llega = undefined;
+  etiqueta_1.lineas_que_salen = [];
+
   canvas.add(etiqueta_1);
   return etiqueta_1;
 }
@@ -143,10 +154,12 @@ function crear_etiqueta(texto, x, y) {
 function conectar(desde, hasta) {
   var linea = crear_linea();
 
-  desde.line2 = linea;
-  hasta.line1 = linea;
+  desde.lineas_que_salen.push(linea);
+  hasta.linea_que_llega = linea;
 
   canvas.add(linea);
+  canvas.sendToBack(linea);
+
   ajustar_lineas_conectadas(desde);
   ajustar_lineas_conectadas(hasta);
 }
@@ -192,4 +205,24 @@ function crear_subitem() {
   }
 
     canvas.add(nuevo_concepto);
+}
+
+
+
+
+function zoom_acercar() {
+  canvas.setZoom(canvas.viewport.zoom*1.1);
+}
+
+function zoom_alejar() {
+  canvas.setZoom(canvas.viewport.zoom*.9);
+}
+
+function zoom_reiniciar() {
+  canvas.viewport.zoom = 1;
+  canvas.setZoom(canvas.viewport.zoom);
+}
+
+function definir_modo_paneo(estado) {
+  canvas.isGrabMode = estado;
 }

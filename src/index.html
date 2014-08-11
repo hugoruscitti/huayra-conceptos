@@ -2,21 +2,27 @@
   <head>
     <meta charset='utf8'></meta>
     <script src='js/fabric.js'></script>
-    <style>
-      canvas {
-        border: 1px solid #ccc;
-      }
+    <script src='js/fabricjs_viewport.js'></script>
+    <script src="js/jquery-1.11.0.min.js"></script>
 
-      .botones {
-        margin-bottom: 20px;
-      }
+    <style>
+      canvas { border: 1px solid #ccc; }
+      .botones { margin-bottom: 20px; }
     </style>
+
   </head>
 
   <body>
 
     <div class='botones'>
       <button onclick='crear_subitem()'>Crear subconcepto</button>
+      <button onclick='zoom_acercar()'>+</button>
+      <button onclick='zoom_alejar()'>-</button>
+      <button onclick='zoom_reiniciar()'>=</button>
+
+      <button onclick='definir_modo_paneo(true)'>iniciar paneo</button>
+      <button onclick='definir_modo_paneo(false)'>detener paneo</button>
+
     </div>
 
     <canvas id='c' width='400' height='400'></canvas>
