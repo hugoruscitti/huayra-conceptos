@@ -14,11 +14,11 @@ Te recomiendo un paper que habla sobre el transfondo teórico de los mapas conce
 
 - http://cmap.ihmc.us/publications/researchpapers/theorycmaps/theoryunderlyingconceptmaps.htm
 
-También hay una intrucción mucho mas sencilla en esta web:
+También hay una introducción mucho más sencilla de leer en esta web:
 
 - http://www.inspiration.com/visual-learning/concept-mapping
 
-y varios ejemplos de mapas realizados en escuelas:
+y varios mapas conceptuales de ejemplo realizados en escuelas:
 
 - http://www.inspiration.com/inspiration-thinking-and-planning-examples
 - 
