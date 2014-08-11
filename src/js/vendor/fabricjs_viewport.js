@@ -103,7 +103,7 @@
     };
 
     Viewport.prototype.setZoom = function(newZoom) {
-      this._adjustPositionAfterZoom(newZoom);
+      //this._adjustPositionAfterZoom(newZoom);
       return this.zoom = newZoom;
     };
 
