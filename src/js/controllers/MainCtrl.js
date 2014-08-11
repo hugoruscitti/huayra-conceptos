@@ -8,16 +8,6 @@ app.controller('MainCtrl', function MainCtrl($scope) {
     canvas.setZoom($scope.data.zoom);
   }
 
-  $scope.zoom_acercar = function() {
-    $scope.data.zoom += 0.2;
-    actualizar_zoom();
-  }
-
-  $scope.zoom_alejar = function() {
-    $scope.data.zoom -= 0.2;
-    actualizar_zoom();
-  }
-
   $scope.zoom_reiniciar = function() {
     $scope.data.zoom = 1;
     actualizar_zoom();

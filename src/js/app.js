@@ -221,11 +221,13 @@ function definir_modo_paneo(estado) {
 
 
   function animate(e, dir) {
+    var velocidad = 50;
+
     if (e.target) {
       fabric.util.animate({
         startValue: e.target.get('angle'),
         endValue: e.target.get('angle') + (dir ? 3 : -3),
-        duration: 75,
+        duration: velocidad,
         onChange: function(value) {
           e.target.setAngle(value);
           canvas.renderAll();
@@ -234,10 +236,11 @@ function definir_modo_paneo(estado) {
           e.target.setCoords();
         }
       });
+
       fabric.util.animate({
         startValue: e.target.get('scaleX'),
         endValue: e.target.get('scaleX') + (dir ? 0.1 : -0.1),
-        duration: 75,
+        duration: velocidad,
         onChange: function(value) {
           e.target.scale(value);
           canvas.renderAll();
